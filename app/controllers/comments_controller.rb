@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.new(title: params[:title], my_thread_id: params[:my_thread_id])
     if @comment.save
       redirect_to my_thread_comments_path
     else
@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:title).merge(user_id: current_user.id, my_thread_id: params[:my_thread_id])
+    params.require(:comment).permit(:title).merge(my_thread_id: params[:my_thread_id])
   end
 
 end
