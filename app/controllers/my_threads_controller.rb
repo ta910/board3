@@ -11,7 +11,7 @@ class MyThreadsController < ApplicationController
   end
 
   def create
-    @thread = current_user.my_threads.new(title: params[:title])
+    @thread = MyThread.new(title: params[:title], user_id: current_user.id)
     if @thread.save
       redirect_to my_threads_path
     else
@@ -42,7 +42,7 @@ class MyThreadsController < ApplicationController
   end
 
   def thread_params
-    params.require(:my_thread).permit(:title)
+    params.require(:my_thread).permit(:title).merge(user_id: current_user.id)
   end
 
 end
