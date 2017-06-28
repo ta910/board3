@@ -11,7 +11,7 @@ class MyThreadsController < ApplicationController
   end
 
   def create
-    @thread = currnt_user.my_threads.new(title: params[:title])
+    @thread = current_user.my_threads.new(title: params[:title])
     if @thread.save
       redirect_to my_threads_path
     else
