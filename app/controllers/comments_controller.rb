@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
 
   def index
-    @comments = @thread.comments.all
+    @comments = @thread.comments
   end
 
   def new
