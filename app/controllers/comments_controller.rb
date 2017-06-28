@@ -12,7 +12,8 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = current_user.comments.new(title: params[:title], my_thread_id: params[:my_thread_id])
+    @comment = current_user.comments.new(title: params.require(:comment)[:title],
+                                         my_thread_id: params[:my_thread_id])
     if @comment.save
       redirect_to my_thread_comments_path
     else
