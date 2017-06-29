@@ -18,7 +18,7 @@ class MyThreadsController < ApplicationController
   end
 
   def edit
-    @thread = thread
+    thread
   end
 
   def update
@@ -37,7 +37,7 @@ class MyThreadsController < ApplicationController
   private
 
   def thread
-    MyThread.find(params[:id])
+    @thread ||= MyThread.find(params[:id])
   end
 
   def thread_params

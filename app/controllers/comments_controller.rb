@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = comment
+    comment
   end
 
   def update
@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
   end
 
   def comment
-    Comment.find(params[:id])
+    @comment ||= Comment.find(params[:id])
   end
 
   def comment_params
