@@ -1,7 +1,5 @@
 class MyThreadsController < ApplicationController
 
-  before_action :set_thread, only: [:edit, :update, :destroy]
-
   def index
     @threads = MyThread.all
   end
@@ -20,10 +18,11 @@ class MyThreadsController < ApplicationController
   end
 
   def edit
+    @thread = thread
   end
 
   def update
-    if @thread.update(thread_params)
+    if thread.update(thread_params)
       redirect_to my_threads_path
     else
       render :new
@@ -31,14 +30,14 @@ class MyThreadsController < ApplicationController
   end
 
   def destroy
-    @thread.destroy
+    thread.destroy
     redirect_to my_threads_path
   end
 
   private
 
-  def set_thread
-    @thread = MyThread.find(params[:id])
+  def thread
+    MyThread.find(params[:id])
   end
 
   def thread_params

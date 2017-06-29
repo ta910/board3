@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
 
   before_action :set_thread, except: [:show, :destroy]
-  before_action :set_comment, only: [:edit, :update, :destroy]
 
   def index
     @comments = @thread.comments
@@ -22,10 +21,11 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    @comment = comment
   end
 
   def update
-    if @comment.update(comment_params)
+    if comment.update(comment_params)
       redirect_to my_thread_comments_path
     else
       render :new
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
+    comment.destroy
     redirect_to my_thread_comments_path
   end
 
@@ -43,8 +43,8 @@ class CommentsController < ApplicationController
     @thread = MyThread.find(params[:my_thread_id])
   end
 
-  def set_comment
-    @comment = Comment.find(params[:id])
+  def comment
+    Comment.find(params[:id])
   end
 
   def comment_params
