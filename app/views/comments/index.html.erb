@@ -1,0 +1,15 @@
+<h1>コメント一覧</h1>
+
+<% @comments.each do |comment| %>
+  <%= comment.title %>
+  <% if comment.user_id == current_user.id %>
+    <%= link_to "編集", edit_my_thread_comment_path(@thread,comment) %>
+    <%= link_to "削除", "/my_threads/#{@thread.id}/comments/#{comment.id}", method: :delete %>
+  <% end %>
+  <br>
+<% end %>
+
+<br>
+
+<%= link_to '新規コメント', new_my_thread_comment_path %>
+<%= link_to 'ホームへ', my_threads_path %>
